@@ -1,3 +1,8 @@
+/*
+Package downloader can download files via the http
+
+Can download using multiple threads and avoid file collisions
+ */
 package downloader
 
 import (
