@@ -164,6 +164,8 @@ func (d *Downloader) Download(destFileName string, threads int) (int64, error) {
 		os.Remove(f.Name())
 	}
 
+	out.Close()
+
 	return totalBytesDownloaded, nil
 }
 
