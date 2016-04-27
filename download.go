@@ -17,8 +17,10 @@ type byteCounterWriter struct {
 }
 
 func (w *byteCounterWriter) Write(p []byte) (n int, err error) {
-	w.onBytesWritten(len(p))
-	return (*w.writer).Write(p)
+	if w.onBytesWritten != nil {
+		w.onBytesWritten(len(p))
+	}
+	return w.writer.Write(p)
 }
 
 type dlJob struct {
