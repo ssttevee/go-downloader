@@ -45,18 +45,19 @@ func analyze(t *testing.T, file *os.File) {
 }
 
 func testDownload(t *testing.T, d *Download) {
+	const fmtStr = "Download Progress: %d out of %d - %.2f"
 
 	lastProgress := float32(-1)
-	for p := float32(0); p < float32(1); p = d.Progress() {
+	for p := float32(0); p < float32(1); p = d.Percent() {
 		if lastProgress != p {
-			t.Logf("Download Progress: %.2f", p * float32(100))
+			t.Logf(fmtStr, d.Current(), d.TotalBytes(), p * float32(100))
 			lastProgress = p
 		}
 
 		runtime.Gosched()
 	}
 
-	t.Logf("Download Progress: %.2f", d.Progress() * float32(100))
+	t.Logf(fmtStr, d.Current(), d.TotalBytes(), d.Percent() * float32(100))
 
 	if err := d.Wait(); err != nil {
 		t.Fatal(err)
