@@ -45,6 +45,9 @@ func (d *Downloader) Fragmentable() bool {
 
 // NumFragments calculates the number of fragments for the target url
 func (d *Downloader) NumFragments() int {
+	if (!d.fragmentable) {
+		return 1
+	}
 	return int(math.Ceil(float64(d.size) / float64(d.FragmentSize)))
 }
 
