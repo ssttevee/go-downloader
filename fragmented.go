@@ -5,6 +5,7 @@ import (
 	"io"
 	"fmt"
 	"net/http"
+	"runtime"
 )
 
 type dlJob struct {
@@ -125,6 +126,8 @@ func (d *Downloader) Download(destFileName string, threads int) (*Download, erro
 				close(resChan)
 				break
 			}
+
+			runtime.Gosched()
 		}
 
 		resCount := 0
