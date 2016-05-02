@@ -145,6 +145,15 @@ func (d *Downloader) Download(destFileName string, threads int) (*Download, erro
 			}
 		}
 
+		// create the destination file
+		out, err := createDestFile(destFileName)
+		if err != nil {
+			dl.done <- err
+			return
+		}
+
+		dl.file = out
+
 		// copy all parts to the output file
 		for _, path := range paths {
 			f, err := os.Open(path)
@@ -184,14 +193,6 @@ func (d *Downloader) Download(destFileName string, threads int) (*Download, erro
 	}
 
 	close(jobsChan)
-
-	// create the destination file
-	out, err := createDestFile(destFileName)
-	if err != nil {
-		return nil, err
-	}
-
-	dl.file = out
 
 	return dl, nil
 }
