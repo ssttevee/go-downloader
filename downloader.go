@@ -1,7 +1,7 @@
 /*
-Package downloader can download files via the http
+Asynchronously download files via HTTP
 
-Can download using multiple threads and avoid file collisions
+Able to use multiple threads and avoid filename collisions
  */
 package downloader
 
