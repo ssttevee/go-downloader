@@ -24,12 +24,15 @@ type Downloader struct {
 	HttpClient      *http.Client
 
 	OnBytesReceived func(int)
+
+	dirty           bool
 }
 
 // Url returns the target url
 func (d *Downloader) Url() string {
 	return d.url
 }
+
 // Url returns the size of the file at the target url
 func (d *Downloader) Size() int64 {
 	return d.size
@@ -52,6 +55,13 @@ func (d *Downloader) httpClient() *http.Client {
 	}
 
 	return client
+}
+
+func (d *Downloader) makeDownload() *Download {
+	return &Download{
+		done: make(chan error),
+		max: int(d.size),
+	}
 }
 
 // New tries to get the `Content-Length` of the target url
