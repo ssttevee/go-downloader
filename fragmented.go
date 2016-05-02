@@ -151,7 +151,6 @@ func (d *Downloader) Download(destFileName string, threads int) (*Download, erro
 			dl.done <- err
 			return
 		}
-		defer out.Close()
 
 		dl.file = out
 
@@ -175,6 +174,8 @@ func (d *Downloader) Download(destFileName string, threads int) (*Download, erro
 				os.Remove(path)
 			}
 		}
+
+		dl.file.Close()
 
 		close(dl.done)
 	}()
