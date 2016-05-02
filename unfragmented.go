@@ -18,6 +18,7 @@ func (d *Downloader) UnfragmentedDownload(destFileName string) (*Download, error
 	if err != nil {
 		return nil, err
 	}
+	defer out.Close()
 
 	dl := d.makeDownload()
 	dl.file = out
