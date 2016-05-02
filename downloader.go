@@ -70,7 +70,7 @@ func (d *Downloader) makeDownload() *Download {
 // New tries to get the `Content-Length` of the target url
 // and also checks for the `Accept-Ranges` header for fragmentability
 //
-// returns an instance of Downloader on success
+// Returns an instance of Downloader on success
 func New(url string) (*Downloader, error) {
 	res, err := http.Head(url)
 	if err != nil {

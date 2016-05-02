@@ -4,9 +4,9 @@ import (
 	"io"
 )
 
-// UnfragmentedDownload starts downloading the file to the destination without fragmenting the file
+// UnfragmentedDownload starts downloading the file directly to the destination and without fragmenting the file
 //
-// Returns the number of bytes downloaded
+// Returns a Download instance
 func (d *Downloader) UnfragmentedDownload(destFileName string) (*Download, error) {
 	res, err := d.httpClient().Get(d.url)
 	if err != nil {

@@ -21,7 +21,7 @@ type dlRes struct {
 
 // Download starts downloading the file to the destination with some number of threads
 //
-// Returns the number of bytes downloaded
+// Returns a Download instance
 func (d *Downloader) Download(destFileName string, threads int) (*Download, error) {
 	// make sure the target url is fragmentable
 	// otherwise redirect to UnfragmentedDownload
