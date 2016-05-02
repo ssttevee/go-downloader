@@ -24,9 +24,19 @@ func (d *Download) File() *os.File {
 	return d.file
 }
 
-// Progress gets a float value from 0 - 1 depending on the progress of the download
-func (d *Download) Progress() float32 {
+// Percent returns a float value from 0 - 1 depending on the progress of the download
+func (d *Download) Percent() float32 {
 	return float32(d.current) / float32(d.max)
+}
+
+// Current returns the number of bytes downloaded
+func (d *Download) Current() int {
+	return d.current
+}
+
+// TotalBytes returns the total byte size of the download
+func (d *Download) TotalBytes() int {
+	return d.max
 }
 
 // Wait blocks the thread until the download is complete
